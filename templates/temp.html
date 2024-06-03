@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>Search Engine</header>
+    <div class="container">
+        <form action="/" method="post">
+            <input id="query-box" type="text" name="input" value="{{ query }}" onkeydown="GetAutoComplete(this)"> 
+            <div class="radio-buttons">
+                <label class="radio-label">WikIR: <input type="radio" name="dataset" value="1" id=""></label>
+                <label class="radio-label">Antique: <input type="radio" name="dataset" value="2" id=""></label>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+        <p class="pp">Number of Results: {{ count }}</p>
+        <div class="results">
+            {% for result in results %}
+            <div class="result-item">
+                <p class="score">Score: {{ result['score'] }}</p>
+                <p class="id">ID: {{ result['id'] }}</p>
+                <p>{{ result['text'] }}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+    <script src="{{ url_for('static', filename='auto-complete.js') }}"></script>
+    <script src="{{ url_for('static', filename='tempscript.js') }}"></script>
+</body>
+</html>
